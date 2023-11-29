@@ -1,4 +1,6 @@
 import dependencies from "../../dependencies";
+import {LineChart} from "../../Components/lineChart";
+import { Log } from "../../Components/log";
 
 const Dashboard = () => {
   const teste = dependencies.axios
@@ -8,7 +10,9 @@ const Dashboard = () => {
     });
   return (
     <>
-      <h1>OPA TESTE</h1>
+      <div>
+        <LineChart />
+      </div>
     </>
   );
 };
