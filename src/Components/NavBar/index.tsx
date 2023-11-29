@@ -5,11 +5,9 @@ const NavBar = () => {
   return (
     <>
       <S.NavBarContainer>
-        <S.LogoImage src={logoSvg} alt="Logo da empresa Line" />
-        <S.NavText>Início</S.NavText>
-        <S.NavText>AWS</S.NavText>
-        <S.NavText>Oracle</S.NavText>
-        <S.NavText>Jira</S.NavText>
+        <S.LogoContainer>
+          <S.LogoImage src={logoSvg} alt="Logo da empresa Line" />
+        </S.LogoContainer>
       </S.NavBarContainer>
     </>
   );
