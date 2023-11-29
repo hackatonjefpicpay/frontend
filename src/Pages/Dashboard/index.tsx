@@ -1,18 +1,16 @@
 import dependencies from "../../dependencies";
 import {LineChart} from "../../Components/lineChart";
 import { Log } from "../../Components/log";
+import * as S from "./style";
+import { NavBar } from "../../Components/NavBar";
 
 const Dashboard = () => {
-  const teste = dependencies.axios
-    .get("https://ocistatus.oraclecloud.com/api/v2/components.json")
-    .then((resp) => {
-      console.log(resp.data);
-    });
   return (
     <>
-      <div>
-        <LineChart />
-      </div>
+      <S.PageWrapper>
+        <NavBar />
+        <S.InfoContainer></S.InfoContainer>
+      </S.PageWrapper>
     </>
   );
 };
