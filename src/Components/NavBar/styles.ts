@@ -24,13 +24,18 @@ export const NavText = styled("h2")`
   padding: 0.5rem;
   background-color: #ffffff40;
   width: 100%;
-  text-align: center;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
   cursor: pointer;
 
   &:hover {
     transition: 200ms;
     background-color: #ffffff30;
+    width: 115%;
+    box-shadow: 2px 2px 10px 2px #11c76f;
   }
 `;
 
