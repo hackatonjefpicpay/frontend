@@ -1,14 +1,14 @@
 import dependencies from "../../dependencies";
+import * as S from "./style";
+import { NavBar } from "../../Components/NavBar";
 
 const Dashboard = () => {
-  const teste = dependencies.axios
-    .get("https://ocistatus.oraclecloud.com/api/v2/components.json")
-    .then((resp) => {
-      console.log(resp.data);
-    });
   return (
     <>
-      <h1>OPA TESTE</h1>
+      <S.PageWrapper>
+        <NavBar />
+        <S.InfoContainer></S.InfoContainer>
+      </S.PageWrapper>
     </>
   );
 };
