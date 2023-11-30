@@ -4,7 +4,7 @@ import { ServiceMainCard } from "../../Components/ServiceMainCard";
 import { Loading } from "../../Components/Loading";
 import { GetOracleStatus, GetJiraStatus } from "../../Services/utils";
 import { useEffect, useState } from "react";
-import { Snackbar, Alert } from "@mui/material";
+import { Snackbar, Alert, Button } from "@mui/material";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
@@ -123,8 +123,7 @@ const Dashboard = () => {
   const [oracleUpdatedAt, setOracleUpdatedAt] = useState<Date>()
   const [jiraUpdatedAt, setJiraUpdatedAt] = useState<Date>()
   const [jiraFinishedUpdating, setJiraFinishedUpdating] = useState(true)
-  const [oracleFinishedUpdating, setOracleFinishedUpdating] = useState(true)
-  
+  const [oracleFinishedUpdating, setOracleFinishedUpdating] = useState(true)  
 
   const GetOracleStatusQuery = async () => {
     setOracleFinishedUpdating(false)
@@ -155,18 +154,32 @@ const Dashboard = () => {
     }
   }
 
+  function generateIncident(){
+    setJiraUpdatedAt(new Date())
+    const response = {"donw":1,"normal":10,"percentualDown":"9.0%","percentualNormal":"91.0%","percentualWarn":"0.0%","total":11,"warn":0}
+    setJiraServices(response);
+    checkCurrentStatus("jira", response);
+
+    setTimeout(()=>{
+      setJiraUpdatedAt(new Date())
+      const response = {"donw":0,"normal":11,"percentualDown":"0.0%","percentualNormal":"100.0%","percentualWarn":"0.0%","total":11,"warn":0}
+      setJiraServices(response);
+      checkCurrentStatus("jira", response);
+    }, 10000)
+  }
+
   useEffect(() => {
     getPlataformsStatus()
     localStorage.clear();
     setTimeout(() => setShowLoading(false), 1000);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      getPlataformsStatus()
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     getPlataformsStatus()
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   if (showLoading) {
     return <Loading />;
@@ -184,6 +197,17 @@ const Dashboard = () => {
           {message}
         </Alert>
       </Snackbar>
+
+      <div
+      style={{
+        position: "absolute",
+        right: "5%",
+        bottom: "5%"
+      }}>
+        <Button onClick={generateIncident}>
+          Gerar incidente
+        </Button>
+      </div>
 
       <S.PageWrapper>
         <NavBar />
