@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Box } from "@mui/material";
 
 export const CardContainer = styled(Box)`
-  height: 15rem;
+  height: 17rem;
   width: 30%;
   background: var(
     --gradient,
@@ -13,13 +13,17 @@ export const CardContainer = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 1780px) {
+    height: 16rem;
+  }
 `;
 
 export const ServiceInfoContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3rem;
+  gap: 1.5rem;
 `;
 
 export const ServiceStatus = styled("p")`
