@@ -1,33 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./styles";
+import { GetJiraHistoric, GetOracleHistoric } from "../../Services/utils";
 
 interface IServiceNotificationListProps {
-    company:string;
-    service: string;
-    status: string;
-    description?: string;
+    data: any
 }
-const NotificationList = ({ company, service, status, description }: IServiceNotificationListProps) => {
-    let color = ''
-    
-    if (status === 'down'){color = 'red'}
-    else if (status === 'up'){color = 'green'}
-    else {color = 'yellow'}
+const NotificationList = ({data }: IServiceNotificationListProps) => {
+
 
     return (
         <S.ContainerBox>
             <S.TitleBox>Last Incidents</S.TitleBox>
-            <S.RowContainer>
-                <S.LittleRowStatus>
-                    <S.Title>Service: {company}</S.Title>
-                    <S.ContainerStatus>
-                        <p>{status}</p>
-                        <S.CircleStatus style={{backgroundColor:`${color}`}} ></S.CircleStatus>
-                    </S.ContainerStatus>
-                </S.LittleRowStatus>
-                <S.TextNotification>{service}</S.TextNotification>
-                <S.TextNotification>{description}</S.TextNotification>
-            </S.RowContainer>
+            {data.map((dado: any) => {
+                console.log(dado)
+                return(
+                    <>
+                        <S.RowContainer>
+                            <S.LittleRowStatus>
+                                <S.Title>{dado[1].name}</S.Title>
+                                <S.ContainerStatus>
+                                    <S.CircleStatus style={{backgroundColor:`${dado[1]?.status.toLowerCase() == "resolved" ? 'green' : 'red'}`}} ></S.CircleStatus>
+                                </S.ContainerStatus>
+                            </S.LittleRowStatus>
+                            <S.TextNotification>Impacto: {dado[1].impact ? dado[1].impact : 'Não medido'}</S.TextNotification>
+                        </S.RowContainer>
+                    </>)
+                    })}
         </S.ContainerBox>
     )
 

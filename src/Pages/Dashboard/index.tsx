@@ -2,15 +2,11 @@ import * as S from "./style";
 import { NavBar } from "../../Components/NavBar";
 import { ServiceMainCard } from "../../Components/ServiceMainCard";
 import { Loading } from "../../Components/Loading";
-import { GetOracleStatus, GetJiraStatus } from "../../Services/utils";
+import { GetOracleStatus, GetJiraStatus, GetOracleHistoric, GetJiraHistoric } from "../../Services/utils";
 import { useEffect, useState } from "react";
 
-<<<<<<< HEAD
 import { NotificationList } from "../../Components/NotificationList";
 
-
-=======
->>>>>>> 109f28588a9b0eb849dd4187fb437af96017b478
 const Dashboard = () => {
   const [showLoading, setShowLoading] = useState(true);
   const [oracleServices, setOracleServices] = useState<any>([]);
@@ -33,6 +29,54 @@ const Dashboard = () => {
 
     setTimeout(() => setShowLoading(false), 1000);
   }, []);
+
+  
+  const date = new Date()
+
+  const [getOracleIncident,setgetOracleIncident] = useState<any>([]);
+  const [getJIRAIncident,setgetJIRAIncident] = useState<any>([]);
+  const [getAWSIncident,setgetAWSIncident] = useState<any>([]);
+
+  const [fullIncidents, setFullIncidents] = useState<any>([]);
+
+  const GetOracleIncident = async () => {
+      const res = await GetOracleHistoric(date.getMonth());
+      let data = Object.entries(res);
+      setgetOracleIncident(data);
+  };
+
+  const GetJiraIncident = async () => {
+      const res = await GetJiraHistoric();
+      let data = Object.entries(res);
+      setgetJIRAIncident(data);
+  };
+
+  useEffect(() => {
+      GetOracleIncident();
+      GetJiraIncident();
+  }, [])
+
+  useEffect(() => {
+    // console.log(getOracleIncident);
+    // console.log(getJIRAIncident);
+
+    let inc: any = []
+
+    if(getOracleIncident?.length > 0){
+      getOracleIncident.map((inci: any) => {
+       inc.push(inci)
+      })
+    }
+
+    if(getJIRAIncident?.length > 0){
+      getJIRAIncident.map((inci: any) => {
+        inc.push(inci)
+      })
+    }
+
+    setFullIncidents(inc)
+
+}, [getOracleIncident, getJIRAIncident])
 
   if (showLoading) {
     return <Loading />;
@@ -83,7 +127,7 @@ const Dashboard = () => {
                 />
               </S.ServiceCardGrid>
               </S.ServicesStatusContainer>
-            <NotificationList company="aws" service="xpto" status="down"  />  
+            <NotificationList data={fullIncidents}  />  
           </S.InfoContainer>
       </S.PageWrapper>
     </>
