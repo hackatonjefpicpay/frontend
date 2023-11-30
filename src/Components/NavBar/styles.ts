@@ -24,4 +24,5 @@ export const LogoContainer = styled(Box)`
 
 export const LogoImage = styled("img")`
   height: 100%;
+  cursor: pointer;
 `;
