@@ -12,7 +12,6 @@ const NotificationList = ({data }: IServiceNotificationListProps) => {
         <S.ContainerBox>
             <S.TitleBox>Last Incidents</S.TitleBox>
             {data.map((dado: any) => {
-                console.log(dado)
                 return(
                     <>
                         <S.RowContainer>

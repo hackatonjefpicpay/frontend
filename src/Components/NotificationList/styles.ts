@@ -7,12 +7,14 @@ export const ContainerBox = styled(Box)`
     --gradient,
     linear-gradient(101deg, #272727 1.82%, #161616 99.91%)
   );
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   /* border-radius: 20px; */
   height: 80vh;
   overflow-y: auto;
+  margin: auto;
+
 `;
 
 export const TitleBox = styled(Box)`
