@@ -1,7 +1,12 @@
-import dependencies from "../../dependencies";
 import * as S from "./style";
 import { NavBar } from "../../Components/NavBar";
 import { ServiceMainCard } from "../../Components/ServiceMainCard";
+import {
+  GetOracleData,
+  GetJiraData,
+  GetOracleStatus,
+  GetJiraStatus,
+} from "../../Services/utils";
 import { useEffect } from "react";
 
 const servicesList = [
@@ -23,6 +28,33 @@ const servicesList = [
 ];
 
 const Dashboard = () => {
+  const GetOracle = async () => {
+    const response = await GetOracleData();
+    console.log(response);
+  };
+
+  const GetJira = async () => {
+    const response = await GetJiraData();
+    console.log(response);
+  };
+
+  const GetOracleStatusQuery = async () => {
+    const response = await GetOracleStatus();
+    console.log(response);
+  };
+
+  const GetJiraStatusQuery = async () => {
+    const response = await GetJiraStatus();
+    console.log(response);
+  };
+
+  useEffect(() => {
+    GetOracle();
+    GetJira();
+    GetOracleStatusQuery();
+    GetJiraStatusQuery();
+  }, []);
+
   return (
     <>
       <S.PageWrapper>

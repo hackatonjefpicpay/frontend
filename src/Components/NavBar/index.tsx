@@ -6,7 +6,11 @@ const NavBar = () => {
     <>
       <S.NavBarContainer>
         <S.LogoContainer>
-          <S.LogoImage src={logoSvg} alt="Logo da empresa Line" />
+          <S.LogoImage
+            src={logoSvg}
+            alt="Logo da empresa Line"
+            onClick={() => window.location.reload()}
+          />
         </S.LogoContainer>
       </S.NavBarContainer>
     </>
