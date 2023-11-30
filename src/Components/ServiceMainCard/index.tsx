@@ -8,7 +8,11 @@ interface IServiceMainCardProps {
   status?: number;
 }
 
-const ServiceMainCard = ({ serviceName, status, place }: IServiceMainCardProps) => {
+const ServiceMainCard = ({
+  serviceName,
+  status,
+  place,
+}: IServiceMainCardProps) => {
   return (
     <>
       <S.CardContainer>
@@ -22,9 +26,7 @@ const ServiceMainCard = ({ serviceName, status, place }: IServiceMainCardProps) 
         ) : status === 2 ? (
           <IconCard value={"warning"} />
         ) : (
-          status === 3 && (
-            <IconCard value={"error"} />
-          )
+          status === 3 && <IconCard value={"error"} />
         )}
       </S.CardContainer>
     </>

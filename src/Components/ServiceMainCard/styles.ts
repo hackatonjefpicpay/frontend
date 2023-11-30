@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { Box } from "@mui/material";
 
 export const CardContainer = styled(Box)`
-  height: 15rem;
-  width: 30rem;
+  height: 17rem;
+  width: 30%;
   background: var(
     --gradient,
     linear-gradient(101deg, #272727 1.82%, #161616 99.91%)
@@ -13,6 +13,10 @@ export const CardContainer = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 1780px) {
+    height: 16rem;
+  }
 `;
 
 export const ServiceInfoContainer = styled(Box)`
