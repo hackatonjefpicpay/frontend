@@ -5,6 +5,11 @@ export const PageWrapper = styled(Box)`
   width: 100%;
 `;
 
+export const InfoGrid = styled(Box)`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+`;
+
 export const InfoContainer = styled(Box)`
   width: 100%;
   background-color: #000000;
@@ -17,7 +22,7 @@ export const InfoContainer = styled(Box)`
 
 export const ServiceCardGrid = styled(Box)`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 3rem;
   width: 100%;
 `;
