@@ -13,6 +13,7 @@ export const CardContainer = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 
   @media screen and (max-width: 1780px) {
     height: 16rem;

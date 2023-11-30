@@ -13,7 +13,7 @@ const NavBar = () => {
             src={logoSvg}
             alt="Logo da empresa Line"
             onClick={() => {
-              if (window.location.pathname.includes("oracle")) {
+              if (window.location.pathname != "/") {
                 navigate("/");
               } else {
                 window.location.reload();

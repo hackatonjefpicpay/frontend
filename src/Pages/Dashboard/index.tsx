@@ -53,6 +53,7 @@ const Dashboard = () => {
                         : 2
                     }
                     place={service[0]}
+                    urlNavigate="oracle"
                   />
                 );
               })}
@@ -72,6 +73,7 @@ const Dashboard = () => {
                     : 2
                 }
                 place={"-"}
+                urlNavigate="jira"
               />
             </S.ServiceCardGrid>
           </S.ServicesStatusContainer>
