@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { NavBar } from "../../Components/NavBar";
 import { InfoContainer, PageWrapper } from "../Dashboard/style";
-import { GetOracleData } from "../../Services/utils";
+import { GetOracleData, GetOracleStatus } from "../../Services/utils";
 import { Loading } from "../../Components/Loading";
+import { LastIncidents } from "../../Components/LastIncidents";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -31,6 +32,8 @@ const OracleDetails = () => {
   const [saoPauloTitle, setSaoPauloTitle] = useState<any>();
   const [saoPauloServices, setSaoPauloServices] = useState<any>([]);
 
+  const [oracleServices, setOracleServices] = useState<any>([]);
+
   const GetOracle = async () => {
     const response = await GetOracleData();
     let dados1 = response?.components;
@@ -47,9 +50,15 @@ const OracleDetails = () => {
     setSaoPauloServices(servicesSP[1]);
   };
 
+  const GetOracleStatusQuery = async () => {
+    const response = await GetOracleStatus();
+    let dados = Object.entries(response);
+    setOracleServices(dados);
+  };
+
   useEffect(() => {
     GetOracle();
-
+    GetOracleStatusQuery();
     setTimeout(() => setShowLoading(false), 1000);
   }, []);
 
@@ -62,6 +71,8 @@ const OracleDetails = () => {
       <PageWrapper>
         <NavBar />
         <InfoContainer>
+          <LastIncidents local="Oracle São Paulo" data={oracleServices[0]} />
+          <LastIncidents local="Oracle Vinhedo" data={oracleServices[1]} />
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { NavBar } from "../../Components/NavBar";
 import { InfoContainer, PageWrapper } from "../Dashboard/style";
-import { GetJiraData } from "../../Services/utils";
+import { GetJiraData, GetJiraStatus } from "../../Services/utils";
 import { Loading } from "../../Components/Loading";
+import { LastIncidents } from "../../Components/LastIncidents";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -26,15 +27,21 @@ const JiraDetails = () => {
   const [showLoading, setShowLoading] = useState(true);
 
   const [jiraServices, setJiraServices] = useState<any>([]);
+  const [jiraServicesStatus, setJiraServicesStatus] = useState<any>();
 
   const GetJira = async () => {
     const response = await GetJiraData();
     setJiraServices(response?.components);
-    console.log(response.components);
+  };
+
+  const GetJiraStatusQuery = async () => {
+    const response = await GetJiraStatus();
+    setJiraServicesStatus(response);
   };
 
   useEffect(() => {
     GetJira();
+    GetJiraStatusQuery();
     setTimeout(() => setShowLoading(false), 1000);
   }, []);
 
@@ -47,6 +54,7 @@ const JiraDetails = () => {
       <PageWrapper>
         <NavBar />
         <InfoContainer>
+          <LastIncidents local="Jira" data={jiraServicesStatus} />
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}

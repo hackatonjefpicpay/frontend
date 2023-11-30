@@ -5,8 +5,6 @@ import { Loading } from "../../Components/Loading";
 import { GetOracleStatus, GetJiraStatus } from "../../Services/utils";
 import { useEffect, useState } from "react";
 
-import { LastIncidents } from "../../Components/LastIncidents";
-
 const Dashboard = () => {
   const [showLoading, setShowLoading] = useState(true);
   const [oracleServices, setOracleServices] = useState<any>([]);

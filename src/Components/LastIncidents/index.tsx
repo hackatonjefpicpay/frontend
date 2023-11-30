@@ -12,8 +12,6 @@ const LastIncidents = ({ local, data }: IServiceIconCardProps) => {
     dataNormalizada = data[1];
   }
 
-  console.log(data);
-
   return (
     <S.ContainerBox>
       <S.TitleBox>
@@ -38,7 +36,7 @@ const LastIncidents = ({ local, data }: IServiceIconCardProps) => {
       <S.IncidentBox>
         <p>Serviços Parados:</p>
         <S.IconParagraph>
-          {data?.donw ? data?.donw : dataNormalizada?.down}
+          {dataNormalizada?.down ? dataNormalizada?.down : data?.donw}
           <S.RedIcon />
         </S.IconParagraph>
       </S.IncidentBox>
