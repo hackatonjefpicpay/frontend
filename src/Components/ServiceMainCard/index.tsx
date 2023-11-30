@@ -1,6 +1,8 @@
 import * as S from "./styles";
 
 import { IconCard } from "../IconCard";
+import { useState } from "react";
+import dependencies from "../../dependencies";
 
 interface IServiceMainCardProps {
   serviceName?: string;
@@ -13,13 +15,17 @@ const ServiceMainCard = ({
   status,
   place,
 }: IServiceMainCardProps) => {
+  const [lastCall, setLastCall] = useState<Date>(new Date());
+
   return (
     <>
       <S.CardContainer>
         <S.ServiceInfoContainer>
           <S.ServiceStatus>Serviço: {serviceName}</S.ServiceStatus>
           <S.ServiceStatus>Local: {place}</S.ServiceStatus>
-          <S.ServiceStatus>Desde: {"29/11/2023"}</S.ServiceStatus>
+          <S.ServiceStatus>
+            Atualização: {dependencies.moment(lastCall).format("HH:mm:ss")}
+          </S.ServiceStatus>
         </S.ServiceInfoContainer>
         {status === 1 ? (
           <IconCard value={"sucess"} />
