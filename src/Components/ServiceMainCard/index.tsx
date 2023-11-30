@@ -13,10 +13,6 @@ const ServiceMainCard = ({
   status,
   place,
 }: IServiceMainCardProps) => {
-  const oracleUrl = process.env.REACT_APP_ORACLE_API_URL;
-
-  console.log(oracleUrl);
-
   return (
     <>
       <S.CardContainer>
