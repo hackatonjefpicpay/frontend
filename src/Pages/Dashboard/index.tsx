@@ -1,51 +1,37 @@
 import * as S from "./style";
 import { NavBar } from "../../Components/NavBar";
 import { ServiceMainCard } from "../../Components/ServiceMainCard";
+import { Loading } from "../../Components/Loading";
 import {
   GetOracleData,
   GetJiraData,
   GetOracleStatus,
   GetJiraStatus,
 } from "../../Services/utils";
-import { useEffect } from "react";
-
-const servicesList = [
-  {
-    name: "AWS",
-    place: "São Paulo",
-    status: 1,
-  },
-  {
-    name: "Jira",
-    place: "São Paulo",
-    status: 2,
-  },
-  {
-    name: "Oracle",
-    place: "São Paulo",
-    status: 3,
-  },
-];
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
+  const [showLoading, setShowLoading] = useState(true);
+  const [oracleServices, setOracleServices] = useState<any>([]);
+  const [jiraServices, setJiraServices] = useState<any>();
+
   const GetOracle = async () => {
     const response = await GetOracleData();
-    console.log(response);
   };
 
   const GetJira = async () => {
     const response = await GetJiraData();
-    console.log(response);
   };
 
   const GetOracleStatusQuery = async () => {
     const response = await GetOracleStatus();
-    console.log(response);
+    let dados = Object.entries(response);
+    setOracleServices(dados);
   };
 
   const GetJiraStatusQuery = async () => {
     const response = await GetJiraStatus();
-    console.log(response);
+    setJiraServices(response);
   };
 
   useEffect(() => {
@@ -53,24 +39,57 @@ const Dashboard = () => {
     GetJira();
     GetOracleStatusQuery();
     GetJiraStatusQuery();
+
+    setTimeout(() => setShowLoading(false), 1000);
   }, []);
+
+  if (showLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
       <S.PageWrapper>
         <NavBar />
         <S.InfoContainer>
-          <S.ServiceCardGrid>
-            {servicesList.map((service) => {
-              return (
-                <ServiceMainCard
-                  key={service.name}
-                  serviceName={service.name}
-                  status={service.status}
-                />
-              );
-            })}
-          </S.ServiceCardGrid>
+          <S.ServicesStatusContainer>
+            <S.ServiceStatus>Oracle:</S.ServiceStatus>
+            <S.ServiceCardGrid>
+              {oracleServices.map((service: any) => {
+                return (
+                  <ServiceMainCard
+                    key={service[0]}
+                    serviceName={"Oracle"}
+                    status={
+                      service[1]?.percentualNormal == "100.0%"
+                        ? 1
+                        : service[1]?.percentualDown == "100.0%"
+                        ? 3
+                        : 2
+                    }
+                    place={service[0]}
+                  />
+                );
+              })}
+            </S.ServiceCardGrid>
+          </S.ServicesStatusContainer>
+          <S.ServicesStatusContainer>
+            <S.ServiceStatus>Jira:</S.ServiceStatus>
+            <S.ServiceCardGrid>
+              <ServiceMainCard
+                key={"JiraService"}
+                serviceName={"Jira"}
+                status={
+                  jiraServices?.up === 100
+                    ? 1
+                    : jiraServices?.down === 100
+                    ? 3
+                    : 2
+                }
+                place={"-"}
+              />
+            </S.ServiceCardGrid>
+          </S.ServicesStatusContainer>
         </S.InfoContainer>
       </S.PageWrapper>
     </>
