@@ -13,12 +13,12 @@ export const ContainerBox = styled(Box)`
   /* border-radius: 20px; */
   height: 80vh;
   overflow-y: auto;
-  margin: auto;
+  margin: 3rem auto;
 
 `;
 
 export const TitleBox = styled(Box)`
-  background-color: black;
+  background-color: #212121;
   display: flex;
   justify-content: center;
   font-weight: 400;
