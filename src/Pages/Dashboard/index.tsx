@@ -5,9 +5,12 @@ import { Loading } from "../../Components/Loading";
 import { GetOracleStatus, GetJiraStatus } from "../../Services/utils";
 import { useEffect, useState } from "react";
 
+<<<<<<< HEAD
 import { NotificationList } from "../../Components/NotificationList";
 
 
+=======
+>>>>>>> 109f28588a9b0eb849dd4187fb437af96017b478
 const Dashboard = () => {
   const [showLoading, setShowLoading] = useState(true);
   const [oracleServices, setOracleServices] = useState<any>([]);
