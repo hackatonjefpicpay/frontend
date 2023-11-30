@@ -16,10 +16,9 @@ export const InfoContainer = styled(Box)`
 `;
 
 export const ServiceCardGrid = styled(Box)`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
   width: 100%;
 `;
 

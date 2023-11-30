@@ -2,26 +2,13 @@ import * as S from "./style";
 import { NavBar } from "../../Components/NavBar";
 import { ServiceMainCard } from "../../Components/ServiceMainCard";
 import { Loading } from "../../Components/Loading";
-import {
-  GetOracleData,
-  GetJiraData,
-  GetOracleStatus,
-  GetJiraStatus,
-} from "../../Services/utils";
+import { GetOracleStatus, GetJiraStatus } from "../../Services/utils";
 import { useEffect, useState } from "react";
 
 const Dashboard = () => {
   const [showLoading, setShowLoading] = useState(true);
   const [oracleServices, setOracleServices] = useState<any>([]);
   const [jiraServices, setJiraServices] = useState<any>();
-
-  const GetOracle = async () => {
-    const response = await GetOracleData();
-  };
-
-  const GetJira = async () => {
-    const response = await GetJiraData();
-  };
 
   const GetOracleStatusQuery = async () => {
     const response = await GetOracleStatus();
@@ -35,8 +22,6 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    GetOracle();
-    GetJira();
     GetOracleStatusQuery();
     GetJiraStatusQuery();
 
@@ -80,9 +65,9 @@ const Dashboard = () => {
                 key={"JiraService"}
                 serviceName={"Jira"}
                 status={
-                  jiraServices?.up === 100
+                  jiraServices?.percentualNormal === "100.0%"
                     ? 1
-                    : jiraServices?.down === 100
+                    : jiraServices?.percentualDown === "100.0%"
                     ? 3
                     : 2
                 }

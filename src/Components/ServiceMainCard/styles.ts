@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 
 export const CardContainer = styled(Box)`
   height: 17rem;
-  width: 30%;
+  width: 100%;
   background: var(
     --gradient,
     linear-gradient(101deg, #272727 1.82%, #161616 99.91%)
