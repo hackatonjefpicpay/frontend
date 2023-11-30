@@ -7,6 +7,7 @@ export const PageWrapper = styled(Box)`
 
 export const InfoGrid = styled(Box)`
   display: grid;
+  background-color: #000000;
   grid-template-columns: 2fr 1fr;
 `;
 
