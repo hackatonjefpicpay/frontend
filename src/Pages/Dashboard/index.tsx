@@ -5,6 +5,8 @@ import { Loading } from "../../Components/Loading";
 import { GetOracleStatus, GetJiraStatus } from "../../Services/utils";
 import { useEffect, useState } from "react";
 
+import { LastIncidents } from "../../Components/LastIncidents";
+
 const Dashboard = () => {
   const [showLoading, setShowLoading] = useState(true);
   const [oracleServices, setOracleServices] = useState<any>([]);
@@ -36,48 +38,62 @@ const Dashboard = () => {
     <>
       <S.PageWrapper>
         <NavBar />
-        <S.InfoContainer>
-          <S.ServicesStatusContainer>
-            <S.ServiceStatus>Oracle:</S.ServiceStatus>
-            <S.ServiceCardGrid>
-              {oracleServices.map((service: any) => {
-                return (
-                  <ServiceMainCard
-                    key={service[0]}
-                    serviceName={"Oracle"}
-                    status={
-                      service[1]?.percentualNormal == "100.0%"
-                        ? 1
-                        : service[1]?.percentualDown == "100.0%"
-                        ? 3
-                        : 2
-                    }
-                    place={service[0]}
-                    urlNavigate="oracle"
-                  />
-                );
-              })}
-            </S.ServiceCardGrid>
-          </S.ServicesStatusContainer>
-          <S.ServicesStatusContainer>
-            <S.ServiceStatus>Jira:</S.ServiceStatus>
-            <S.ServiceCardGrid>
-              <ServiceMainCard
-                key={"JiraService"}
-                serviceName={"Jira"}
-                status={
-                  jiraServices?.percentualNormal === "100.0%"
-                    ? 1
-                    : jiraServices?.percentualDown === "100.0%"
-                    ? 3
-                    : 2
-                }
-                place={"-"}
-                urlNavigate="jira"
+        <S.InfoGrid>
+          <S.InfoContainer>
+            <S.ServicesStatusContainer>
+              <S.ServiceStatus>Oracle:</S.ServiceStatus>
+              <S.ServiceCardGrid>
+                {oracleServices.map((service: any) => {
+                  return (
+                    <ServiceMainCard
+                      key={service[0]}
+                      serviceName={"Oracle"}
+                      status={
+                        service[1]?.percentualNormal == "100.0%"
+                          ? 1
+                          : service[1]?.percentualDown == "100.0%"
+                          ? 3
+                          : 2
+                      }
+                      place={service[0]}
+                      urlNavigate="oracle"
+                    />
+                  );
+                })}
+              </S.ServiceCardGrid>
+            </S.ServicesStatusContainer>
+            <S.ServicesStatusContainer>
+              <S.ServiceStatus>Jira:</S.ServiceStatus>
+              <S.ServiceCardGrid>
+                <ServiceMainCard
+                  key={"JiraService"}
+                  serviceName={"Jira"}
+                  status={
+                    jiraServices?.percentualNormal === "100.0%"
+                      ? 1
+                      : jiraServices?.percentualDown === "100.0%"
+                      ? 3
+                      : 2
+                  }
+                  place={"-"}
+                  urlNavigate="jira"
+                />
+              </S.ServiceCardGrid>
+            </S.ServicesStatusContainer>
+          </S.InfoContainer>
+          <S.InfoContainer>
+            <S.ServicesStatusContainer>
+              <S.ServiceStatus>Geral:</S.ServiceStatus>
+              <LastIncidents local="Jira" data={jiraServices} />
+              <LastIncidents
+                local="Oracle São Paulo"
+                data={oracleServices[0]}
               />
-            </S.ServiceCardGrid>
-          </S.ServicesStatusContainer>
-        </S.InfoContainer>
+              <LastIncidents local="Oracle Vinhedo" data={oracleServices[1]} />
+              <LastIncidents local="AWS" data={jiraServices} />
+            </S.ServicesStatusContainer>
+          </S.InfoContainer>
+        </S.InfoGrid>
       </S.PageWrapper>
     </>
   );
