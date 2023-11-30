@@ -1,29 +1,29 @@
 import * as S from "./styles";
 
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import ReportProblemIcon from "@mui/icons-material/ReportProblem";
+import { IconCard } from "../IconCard";
 
 interface IServiceMainCardProps {
   serviceName?: string;
+  place?: string;
   status?: number;
 }
 
-const ServiceMainCard = ({ serviceName, status }: IServiceMainCardProps) => {
+const ServiceMainCard = ({ serviceName, status, place }: IServiceMainCardProps) => {
   return (
     <>
       <S.CardContainer>
         <S.ServiceInfoContainer>
           <S.ServiceStatus>Serviço: {serviceName}</S.ServiceStatus>
+          <S.ServiceStatus>Local: {place}</S.ServiceStatus>
           <S.ServiceStatus>Desde: {"29/11/2023"}</S.ServiceStatus>
         </S.ServiceInfoContainer>
         {status === 1 ? (
-          <CheckCircleOutlineIcon sx={{ fontSize: "10rem" }} color="success" />
+          <IconCard value={"sucess"} />
         ) : status === 2 ? (
-          <ReportProblemIcon sx={{ fontSize: "10rem" }} color="warning" />
+          <IconCard value={"warning"} />
         ) : (
           status === 3 && (
-            <ErrorOutlineIcon sx={{ fontSize: "10rem" }} color="error" />
+            <IconCard value={"error"} />
           )
         )}
       </S.CardContainer>

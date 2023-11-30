@@ -1,6 +1,4 @@
 import dependencies from "../../dependencies";
-import {LineChart} from "../../Components/lineChart";
-import { Log } from "../../Components/log";
 import * as S from "./style";
 import { NavBar } from "../../Components/NavBar";
 import { ServiceMainCard } from "../../Components/ServiceMainCard";
@@ -9,14 +7,17 @@ import { useEffect } from "react";
 const servicesList = [
   {
     name: "AWS",
+    place: "São Paulo",
     status: 1,
   },
   {
     name: "Jira",
+    place: "São Paulo",
     status: 2,
   },
   {
     name: "Oracle",
+    place: "São Paulo",
     status: 3,
   },
 ];

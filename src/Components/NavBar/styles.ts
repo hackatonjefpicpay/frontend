@@ -32,16 +32,8 @@ export const NavText = styled("h2")`
   font-weight: 600;
   padding: 0.5rem;
   background-color: #ffffff40;
-<<<<<<< HEAD
-  width: 100%;
-  height: 20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-=======
   height: 100%;
   text-align: center;
->>>>>>> 9fb93cc7a8dee93a5b891a5d67b3748227159a36
   border-radius: 10px;
   cursor: pointer;
 

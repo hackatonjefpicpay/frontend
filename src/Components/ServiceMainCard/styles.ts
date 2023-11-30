@@ -19,7 +19,7 @@ export const ServiceInfoContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3rem;
+  gap: 1.5rem;
 `;
 
 export const ServiceStatus = styled("p")`
