@@ -2,9 +2,11 @@ import * as S from "./style";
 import { NavBar } from "../../Components/NavBar";
 import { ServiceMainCard } from "../../Components/ServiceMainCard";
 import { Loading } from "../../Components/Loading";
-import { GetOracleStatus, GetJiraStatus } from "../../Services/utils";
+import { GetOracleStatus, GetJiraStatus, GetOracleHistoric, GetJiraHistoric } from "../../Services/utils";
 import { useEffect, useState } from "react";
 import { Snackbar, Alert } from "@mui/material";
+
+import { NotificationList } from "../../Components/NotificationList";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
@@ -161,6 +163,50 @@ const Dashboard = () => {
     setTimeout(() => setShowLoading(false), 1000);
   }, []);
 
+  
+  const date = new Date()
+
+  const [getOracleIncident,setgetOracleIncident] = useState<any>([]);
+  const [getJIRAIncident,setgetJIRAIncident] = useState<any>([]);
+  const [getAWSIncident,setgetAWSIncident] = useState<any>([]);
+
+  const [fullIncidents, setFullIncidents] = useState<any>([]);
+
+  const GetOracleIncident = async () => {
+      const res = await GetOracleHistoric(date.getMonth());
+      let data = Object.entries(res);
+      setgetOracleIncident(data);
+  };
+
+  const GetJiraIncident = async () => {
+      const res = await GetJiraHistoric();
+      let data = Object.entries(res);
+      setgetJIRAIncident(data);
+  };
+
+  useEffect(() => {
+      GetOracleIncident();
+      GetJiraIncident();
+  }, [])
+
+  useEffect(() => {
+    let inc: any = []
+
+    if(getOracleIncident?.length > 0){
+      getOracleIncident.map((inci: any) => {
+       inc.push(inci)
+      })
+    }
+
+    if(getJIRAIncident?.length > 0){
+      getJIRAIncident.map((inci: any) => {
+        inc.push(inci)
+      })
+    }
+
+    setFullIncidents(inc)
+
+}, [getOracleIncident, getJIRAIncident])
   useEffect(() => {
     const interval = setInterval(() => {
       getPlataformsStatus()
@@ -195,7 +241,6 @@ const Dashboard = () => {
                 {oracleServices.map((service: any) => {
                   return (
                     <ServiceMainCard
-                    lastCall={oracleUpdatedAt}
                       key={service[0]}
                       serviceName={"Oracle"}
                       status={
@@ -216,7 +261,6 @@ const Dashboard = () => {
               <S.ServiceStatus>Jira:</S.ServiceStatus>
               <S.ServiceCardGrid>
                 <ServiceMainCard
-                  lastCall={jiraUpdatedAt}
                   key={"JiraService"}
                   serviceName={"Jira"}
                   status={
@@ -232,6 +276,7 @@ const Dashboard = () => {
               </S.ServiceCardGrid>
             </S.ServicesStatusContainer>
           </S.InfoContainer>
+          <NotificationList data={fullIncidents}  />
         </S.InfoGrid>
       </S.PageWrapper>
     </>

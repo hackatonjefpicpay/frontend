@@ -11,8 +11,6 @@ const Historic = ({ local, data }: IServiceIconCardProps) => {
     dataNormalizada = data[1];
   }
 
-  console.log(data);
-
   return (
     <S.ContainerBox>
       <S.TitleBox>

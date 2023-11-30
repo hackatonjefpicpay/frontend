@@ -67,6 +67,7 @@ const GetOracleHistoric = async (mes: number) => {
   }
 };
 
+
 export {
   GetOracleData,
   GetJiraData,
