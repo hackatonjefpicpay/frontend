@@ -5,7 +5,8 @@ import { Loading } from "../../Components/Loading";
 import { GetOracleStatus, GetJiraStatus } from "../../Services/utils";
 import { useEffect, useState } from "react";
 
-import { LastIncidents } from "../../Components/LastIncidents";
+import { NotificationList } from "../../Components/NotificationList";
+
 
 const Dashboard = () => {
   const [showLoading, setShowLoading] = useState(true);
@@ -38,7 +39,6 @@ const Dashboard = () => {
     <>
       <S.PageWrapper>
         <NavBar />
-        <S.InfoGrid>
           <S.InfoContainer>
             <S.ServicesStatusContainer>
               <S.ServiceStatus>Oracle:</S.ServiceStatus>
@@ -79,9 +79,9 @@ const Dashboard = () => {
                   urlNavigate="jira"
                 />
               </S.ServiceCardGrid>
-            </S.ServicesStatusContainer>
+              </S.ServicesStatusContainer>
+            <NotificationList company="aws" service="xpto" status="down"  />  
           </S.InfoContainer>
-        </S.InfoGrid>
       </S.PageWrapper>
     </>
   );

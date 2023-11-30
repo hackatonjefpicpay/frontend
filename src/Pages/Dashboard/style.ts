@@ -16,7 +16,7 @@ export const InfoContainer = styled(Box)`
   background-color: #000000;
   padding: 3rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 4rem;
   min-height: 92vh;
 `;
@@ -41,3 +41,10 @@ export const ServiceStatus = styled("p")`
   font-size: 3rem;
   color: #fff;
 `;
+ export const Last_Incident = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1 rem;
+  background-color: red;
+ `
