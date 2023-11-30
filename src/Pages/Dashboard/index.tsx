@@ -81,18 +81,6 @@ const Dashboard = () => {
               </S.ServiceCardGrid>
             </S.ServicesStatusContainer>
           </S.InfoContainer>
-          <S.InfoContainer>
-            <S.ServicesStatusContainer>
-              <S.ServiceStatus>Geral:</S.ServiceStatus>
-              <LastIncidents local="Jira" data={jiraServices} />
-              <LastIncidents
-                local="Oracle São Paulo"
-                data={oracleServices[0]}
-              />
-              <LastIncidents local="Oracle Vinhedo" data={oracleServices[1]} />
-              <LastIncidents local="AWS" data={jiraServices} />
-            </S.ServicesStatusContainer>
-          </S.InfoContainer>
         </S.InfoGrid>
       </S.PageWrapper>
     </>
