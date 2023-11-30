@@ -9,6 +9,7 @@ export const NavBarContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute
 `;
 
 export const LogoContainer = styled(Box)`
