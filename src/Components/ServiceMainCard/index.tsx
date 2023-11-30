@@ -3,6 +3,7 @@ import * as S from "./styles";
 import { IconCard } from "../IconCard";
 import { useState } from "react";
 import dependencies from "../../dependencies";
+import manu from '../../Assets/Images/manu.jpg'
 
 import { useNavigate } from "react-router-dom";
 
@@ -38,9 +39,9 @@ const ServiceMainCard = ({
           <IconCard value={"sucess"} />
         ) : status === 2 ? (
           <IconCard value={"warning"} />
-        ) : (
-          status === 3 && <IconCard value={"error"} />
-        )}
+        ) : 
+          status === 3 ? <IconCard value={"error"} /> : <S.Image src={manu}/>
+        }
       </S.CardContainer>
     </>
   );

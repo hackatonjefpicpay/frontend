@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Snackbar, Alert } from "@mui/material";
 
 import { NotificationList } from "../../Components/NotificationList";
+import axios from "axios";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
@@ -19,6 +20,7 @@ const Dashboard = () => {
     severity: "success" | "error" | "warning" | "info",
     message: string
   ) {
+    axios.get(process.env.REACT_APP_EMAIL_API_URL!)
     setSeverity(severity);
     setMessage(message);
     setOpen(true);
@@ -59,6 +61,7 @@ const Dashboard = () => {
           "error",
           `Um serviço da plataforma ${platform} está indiponível. Veja o histórico de incidentes para mais detalhes`
         );
+
       }
 
       if (status.down < oldStatus.down) {
@@ -273,6 +276,17 @@ const Dashboard = () => {
                   place={"-"}
                   urlNavigate="jira"
                 />
+              </S.ServiceCardGrid>
+            </S.ServicesStatusContainer>
+            <S.ServicesStatusContainer>
+              <S.ServiceStatus>AWS:</S.ServiceStatus>
+              <S.ServiceCardGrid>
+                    <ServiceMainCard
+                      serviceName={"AWS"}
+                      status={0}
+                      place={'-'}
+                      urlNavigate="/"
+                    />
               </S.ServiceCardGrid>
             </S.ServicesStatusContainer>
           </S.InfoContainer>

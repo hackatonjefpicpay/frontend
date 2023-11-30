@@ -32,3 +32,7 @@ export const ServiceStatus = styled("p")`
   font-size: 1.5rem;
   color: #fff;
 `;
+
+export const Image = styled('img')`
+  height: 12rem;
+`

@@ -8,14 +8,14 @@ width: 100%;
 
 export const InfoGrid = styled(Box)`
 display: grid;
-  background-color: #000000;
+  background-color: #050505;
   grid-template-columns: 2fr 1fr;`
   
 ;
 
 export const InfoContainer = styled(Box)`
   width: 100%;
-  background-color: #000000;
+  background-color: #050505;
   padding: 3rem;
   display: flex;
   flex-direction: column;
@@ -40,9 +40,13 @@ display: flex;
 ;
 
 export const ServiceStatus = styled("p")`
-  text-align: center;
+  text-align: start;
   font-weight: 600;
-  font-size: 3rem;
+  font-size: 1.5rem;
   color: #fff;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 35px;
+  background-color: rgba(217, 217, 217, 0.2);
 `
 ;
