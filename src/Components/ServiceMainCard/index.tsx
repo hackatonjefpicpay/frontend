@@ -11,6 +11,7 @@ interface IServiceMainCardProps {
   place?: string;
   status?: number;
   urlNavigate?: string;
+  lastCall?: Date
 }
 
 const ServiceMainCard = ({
@@ -18,8 +19,8 @@ const ServiceMainCard = ({
   status,
   place,
   urlNavigate,
+  lastCall
 }: IServiceMainCardProps) => {
-  const [lastCall, setLastCall] = useState<Date>(new Date());
 
   const navigate = useNavigate();
 
