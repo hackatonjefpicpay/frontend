@@ -1,9 +1,15 @@
+import * as S from "./style";
 import { useEffect, useState } from "react";
 import { NavBar } from "../../Components/NavBar";
 import { InfoContainer, PageWrapper } from "../Dashboard/style";
-import { GetOracleData, GetOracleStatus } from "../../Services/utils";
+import {
+  GetOracleData,
+  GetOracleStatus,
+  GetOracleHistoric,
+} from "../../Services/utils";
 import { Loading } from "../../Components/Loading";
 import { LastIncidents } from "../../Components/LastIncidents";
+import { Historic } from "../../Components/Historic";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -23,6 +29,9 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+
 const OracleDetails = () => {
   const [showLoading, setShowLoading] = useState(true);
 
@@ -33,6 +42,21 @@ const OracleDetails = () => {
   const [saoPauloServices, setSaoPauloServices] = useState<any>([]);
 
   const [oracleServices, setOracleServices] = useState<any>([]);
+
+  const [oracleIncidents, setOracleIncidents] = useState<any>([]);
+
+  const [currentMonth, setCurrentMonth] = useState(11);
+
+  const meses = [
+    {
+      name: "Outubro",
+      value: 10,
+    },
+    {
+      name: "Novembro",
+      value: 11,
+    },
+  ];
 
   const GetOracle = async () => {
     const response = await GetOracleData();
@@ -56,11 +80,23 @@ const OracleDetails = () => {
     setOracleServices(dados);
   };
 
+  const GetOracleHistoricQuery = async () => {
+    const response = await GetOracleHistoric(currentMonth);
+    setOracleIncidents(response);
+  };
+
   useEffect(() => {
     GetOracle();
     GetOracleStatusQuery();
     setTimeout(() => setShowLoading(false), 1000);
   }, []);
+
+  useEffect(() => {
+    if (currentMonth) {
+      GetOracleHistoricQuery();
+      setTimeout(() => setShowLoading(false), 500);
+    }
+  }, [currentMonth]);
 
   if (showLoading) {
     return <Loading />;
@@ -197,6 +233,32 @@ const OracleDetails = () => {
               </TableContainer>
             </AccordionDetails>
           </Accordion>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+            }}
+          >
+            <S.ServiceStatus>Selecione um Mês:</S.ServiceStatus>
+            <Select
+              labelId="demo-simple-select-label"
+              sx={{ backgroundColor: "#fff", color: "#000", width: "30rem" }}
+              id="demo-simple-select"
+              value={currentMonth}
+              label="Selecione o Mês"
+              onChange={(value) => {
+                setCurrentMonth(Number(value.target.value));
+                setShowLoading(true);
+              }}
+            >
+              {meses.map((month: any) => {
+                return <MenuItem value={month.value}>{month.name}</MenuItem>;
+              })}
+            </Select>
+            <Historic local="Histórico de Incidentes" data={oracleIncidents} />
+          </div>
         </InfoContainer>
       </PageWrapper>
     </>

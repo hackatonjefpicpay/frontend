@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import { NavBar } from "../../Components/NavBar";
 import { InfoContainer, PageWrapper } from "../Dashboard/style";
-import { GetJiraData, GetJiraStatus } from "../../Services/utils";
+import {
+  GetJiraData,
+  GetJiraStatus,
+  GetJiraHistoric,
+} from "../../Services/utils";
 import { Loading } from "../../Components/Loading";
 import { LastIncidents } from "../../Components/LastIncidents";
+import { Historic } from "../../Components/Historic";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -29,6 +34,8 @@ const JiraDetails = () => {
   const [jiraServices, setJiraServices] = useState<any>([]);
   const [jiraServicesStatus, setJiraServicesStatus] = useState<any>();
 
+  const [jiraHistoricIncidents, setJiraHistoricIncidents] = useState<any>([]);
+
   const GetJira = async () => {
     const response = await GetJiraData();
     setJiraServices(response?.components);
@@ -39,9 +46,15 @@ const JiraDetails = () => {
     setJiraServicesStatus(response);
   };
 
+  const GetJiraHistoricQuery = async () => {
+    const response = await GetJiraHistoric();
+    setJiraHistoricIncidents(response);
+  };
+
   useEffect(() => {
     GetJira();
     GetJiraStatusQuery();
+    GetJiraHistoricQuery();
     setTimeout(() => setShowLoading(false), 1000);
   }, []);
 
@@ -117,6 +130,10 @@ const JiraDetails = () => {
               </TableContainer>
             </AccordionDetails>
           </Accordion>
+          <Historic
+            local="Histórico de Incidentes"
+            data={jiraHistoricIncidents}
+          />
         </InfoContainer>
       </PageWrapper>
     </>

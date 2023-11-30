@@ -44,4 +44,34 @@ const GetJiraStatus = async () => {
   }
 };
 
-export { GetOracleData, GetJiraData, GetOracleStatus, GetJiraStatus };
+const GetJiraHistoric = async () => {
+  try {
+    const response = await dependencies.axios.get(
+      process.env.REACT_APP_JIRA_HISTORIC_API_URL!
+    );
+    return response?.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+const GetOracleHistoric = async (mes: number) => {
+  try {
+    const response = await dependencies.axios.get(
+      `${process.env
+        .REACT_APP_ORACLE_BASE_API_URL!}/historicalAcidents?month=${mes}`
+    );
+    return response?.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export {
+  GetOracleData,
+  GetJiraData,
+  GetOracleStatus,
+  GetJiraStatus,
+  GetJiraHistoric,
+  GetOracleHistoric,
+};
